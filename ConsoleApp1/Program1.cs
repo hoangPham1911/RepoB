@@ -3,6 +3,7 @@ using iTextSharp.text.pdf;
 
 public class PdfSigner
 {
+    // ky so
     public static void InsertSignatureImage(string inputPdfPath, string outputPdfPath, string signatureImagePath)
     {
         // Đọc tài liệu PDF từ file input
@@ -31,6 +32,7 @@ public class PdfSigner
 
                 // Chèn ảnh chữ ký vào tài liệu PDF
                 pdfContentByte.AddImage(signatureImage);
+                Console.ReadLine();
             }
         }
     }
