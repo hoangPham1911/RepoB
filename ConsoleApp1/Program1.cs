@@ -32,6 +32,7 @@ public class PdfSigner
 
                 // Chèn ảnh chữ ký vào tài liệu PDF
                 pdfContentByte.AddImage(signatureImage);
+                Console.ReadLine();
             }
         }
     }
