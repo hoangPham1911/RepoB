@@ -37,7 +37,7 @@ public class PdfSigner
 
 
 
-
+    // ky so
     public static void Main(string[] args)
     {
         string inputPdfPath = "cv nhan su.pdf"; // Đường dẫn đến file PDF gốc
