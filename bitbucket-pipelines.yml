@@ -6,9 +6,9 @@ pipelines:
           script:
             - git config --global user.email "hoangpham19112002@gmail.com"
             - git config --global user.name "hoangpham1911"
-            - git clone https://hoangpham19112002@bitbucket.org/synv09/repositorysource.git RepositorySource
+            - git clone https://hoangpham1911:hoangpham1911@bitbucket.org/synv09/repositorysource.git RepositorySource
             - cd RepositorySource
-            - git remote add RepositoryDestination https://hoangpham19112002@bitbucket.org/synv09/repositorysource.git
+            - git remote add RepositoryDestination https://hoangpham1911:hoangpham1911@bitbucket.org/synv09/repositorydestination.git
             - git fetch RepositoryDestination
             - git checkout $BITBUCKET_PR_DESTINATION_BRANCH
             - git pull origin $BITBUCKET_PR_DESTINATION_BRANCH
