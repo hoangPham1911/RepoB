@@ -48,3 +48,6 @@ Thumbs.db
 *.mov
 *.wmv
 
+/.vs
+/ConsoleApp1/bin/Debug/net8.0
+/ConsoleApp1/obj
