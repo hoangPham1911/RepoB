@@ -4,11 +4,14 @@ pipelines:
       - step:
           name: Sync PR to RepositoryDestination
           script:
-            - git config --global user.email "hoangpham19112002@gmail.com"
-            - git config --global user.name "hoangpham1911"
-            - git clone https://hoangpham1911:ATBBEKD2KPYxSm2yT4xzBgURmRf9D19AC1FE@bitbucket.org/synv09/repositorysource.git RepositorySource
+            - mkdir -p ~/.ssh
+            - echo -e "Host bitbucket.org\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            - (echo $SSH_KEY | base64 --decode > ~/.ssh/id_rsa)
+            - chmod 700 ~/.ssh/id_rsa
+            - ssh-add ~/.ssh/id_rsa
+            - git clone git@bitbucket.org:synv09/repositorysource.git RepositorySource
             - cd RepositorySource
-            - git remote add RepositoryDestination https://hoangpham1911:ATBBEKD2KPYxSm2yT4xzBgURmRf9D19AC1FE@bitbucket.org/synv09/repositorydestination.git
+            - git remote add RepositoryDestination git@bitbucket.org:synv09/repositorydestination.git
             - git fetch RepositoryDestination
             - git checkout $BITBUCKET_PR_DESTINATION_BRANCH
             - git pull origin $BITBUCKET_PR_DESTINATION_BRANCH
