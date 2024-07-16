@@ -6,10 +6,10 @@ pipelines:
           script:
             - mkdir -p ~/.ssh
             - echo -e "Host bitbucket.org\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
-            - echo $SSH_KEY | base64 --decode > ~/.ssh/id_ed25519
-            - chmod 600 ~/.ssh/id_ed25519
+            - echo $SSH_KEY | base64 --decode > ~/.ssh/key
+            - chmod 600 ~/.ssh/key
             - eval "$(ssh-agent -s)"
-            - SSH_ASKPASS=/bin/true ssh-add ~/.ssh/id_ed25519
+            - SSH_ASKPASS=/bin/true ssh-add ~/.ssh/key
             - git clone git@bitbucket.org:synv09/repositorysource.git RepositorySource
             - cd RepositorySource
             - git remote add RepositoryDestination git@bitbucket.org:synv09/repositorydestination.git
