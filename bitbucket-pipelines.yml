@@ -3,9 +3,8 @@ pipelines:
     - step:
         name: Sync to Repository B
         script:
-          - git clone https://hoangpham19112002@bitbucket.org/synv09/repositorydestination.git
-          - cd repositoryB
-          - git remote add upstream https://hoangpham19112002@bitbucket.org/synv09/repositorysource.git
+          - git clone https://$BITBUCKET_USERNAME:$BITBUCKET_PASSWORD@bitbucket.org/synv09/repositorydestination.git
+          - git remote add upstream https://$BITBUCKET_USERNAME:$BITBUCKET_PASSWORD@bitbucket.org/synv09/repositorysource.git
           - git fetch upstream
           - git merge upstream/main
-          - git push
+          - git push origin main
