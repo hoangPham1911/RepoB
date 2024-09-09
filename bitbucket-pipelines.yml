@@ -6,7 +6,7 @@ pipelines:
           script:
             - git config --global user.email "hoangpham19112002@gmail.com"
             - git config --global user.name "hoangpham1911"
-            - git clone https://hoangpham19112002@bitbucket.org/synv09/repositorydestination.git
+            - git clone https://$BITBUCKET_USERNAME:$BITBUCKET_APP_PASSWORD@bitbucket.org/synv09/repositorysource.git
             - cd repositoryA
-            - git remote add repoB https://hoangpham19112002@bitbucket.org/synv09/repositorydestination.git
+            - git remote add repoB https://$BITBUCKET_USERNAME:$BITBUCKET_APP_PASSWORD@bitbucket.org/synv09/repositorydestination.git
             - git push repoB main
