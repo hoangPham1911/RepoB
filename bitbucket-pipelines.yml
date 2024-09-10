@@ -4,11 +4,14 @@
       - step:
           name: Sync to RepositoryB
           script:
-            # Tạo thư mục ~/.ssh và thiết lập quyền
+            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key
             - mkdir -p ~/.ssh
             - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
             - chmod 600 ~/.ssh/id_rsa
             - ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
+
+            # Kiểm tra SSH key đã được sử dụng đúng cách
+            - ssh -T git@bitbucket.org || exit 1
 
             # Cấu hình Git
             - git config --global user.email "hoangpham19112002@gmail.com"
