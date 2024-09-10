@@ -4,7 +4,7 @@
       - step:
           name: Sync to RepositoryB
           script:
-            # Cấu hình SSH
+            # Tạo thư mục ~/.ssh và thiết lập quyền
             - mkdir -p ~/.ssh
             - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
             - chmod 600 ~/.ssh/id_rsa
@@ -19,7 +19,7 @@
             - cd repositorysource
 
             # Thêm remote repo B bằng SSH
-            - git remote add repoB git@bitbucket.org:synv09/repositorydestination.git
+            - git remote add repositorydestination git@bitbucket.org:synv09/repositorydestination.git
             
             # Push lên repo B
-            - git push repoB main
+            - git push repositorydestination main
