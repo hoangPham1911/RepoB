@@ -5,7 +5,7 @@ public class PdfSigner
 {
     public static void InsertSignatureImage(string inputPdfPath, string outputPdfPath, string signatureImagePath)
     {
-        // Đọc tài liệu PDF từ file inputttt
+        // Đọc tài liệu PDF từ file inputttts
         using (PdfReader pdfReader = new PdfReader(inputPdfPath))
         using (FileStream outputStream = new FileStream(outputPdfPath, FileMode.Create, FileAccess.Write, FileShare.None))
         {
