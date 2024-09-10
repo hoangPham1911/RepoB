@@ -1,12 +1,25 @@
-pipelines:
+﻿pipelines:
   branches:
     main:
       - step:
           name: Sync to RepositoryB
           script:
+            # Cấu hình SSH
+            - mkdir -p ~/.ssh
+            - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+            - chmod 600 ~/.ssh/id_rsa
+            - ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
+
+            # Cấu hình Git
             - git config --global user.email "hoangpham19112002@gmail.com"
             - git config --global user.name "hoangpham1911"
-            - git clone https://$BITBUCKET_USERNAME:$BITBUCKET_APP_PASSWORD@bitbucket.org/synv09/repositorysource.git
-            - cd repositoryA
-            - git remote add repoB https://$BITBUCKET_USERNAME:$BITBUCKET_APP_PASSWORD@bitbucket.org/synv09/repositorydestination.git
+
+            # Clone repo A bằng SSH
+            - git clone git@bitbucket.org:synv09/repositorysource.git
+            - cd repositorysource
+
+            # Thêm remote repo B bằng SSH
+            - git remote add repoB git@bitbucket.org:synv09/repositorydestination.git
+            
+            # Push lên repo B
             - git push repoB main
