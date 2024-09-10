@@ -23,6 +23,10 @@
 
             # Thêm remote repo B bằng SSH
             - git remote add repositorydestination git@bitbucket.org:synv09/repositorydestination.git
-            
-            # Push lên repo B
+
+            # Fetch các thay đổi từ repository destination trước khi push
+            - git fetch repositorydestination main
+            - git merge repositorydestination/main
+
+            # Push lên repo B (sử dụng --force nếu bạn chắc chắn cần ghi đè)
             - git push repositorydestination main
