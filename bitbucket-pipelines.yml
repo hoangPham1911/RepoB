@@ -4,7 +4,7 @@
       - step:
           name: Sync to RepositoryB
           script:
-            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key nếu chưa có
+            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key
             - mkdir -p ~/.ssh
 
             # Thiết lập quyền cho các SSH Private Key có sẵn
@@ -15,6 +15,18 @@
             # Đảm bảo bitbucket.org được thêm vào known_hosts
             - ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
 
+            # Cấu hình file SSH config để sử dụng đúng key cho repo A và repo B
+            - |
+              echo "Host repoA" >> ~/.ssh/config
+              echo "  HostName bitbucket.org" >> ~/.ssh/config
+              echo "  User git" >> ~/.ssh/config
+              echo "  IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+
+              echo "Host repoB" >> ~/.ssh/config
+              echo "  HostName bitbucket.org" >> ~/.ssh/config
+              echo "  User git" >> ~/.ssh/config
+              echo "  IdentityFile ~/.ssh/id_rsa_two" >> ~/.ssh/config
+
             # Kiểm tra SSH key đã được sử dụng đúng cách
             - ssh -T git@bitbucket.org || exit 1
 
@@ -23,14 +35,14 @@
             - git config --global user.name "hoangpham1911"
 
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
-            - git clone git@bitbucket.org:synv09/repositorysource.git
+            - git clone git@repoA:synv09/repositorysource.git
             - cd repositorysource
 
             # Thêm remote repo B bằng SSH (repo B sẽ dùng id_rsa_two)
-            - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
+            - git remote add testbitbu git@repoB:hoangvjp129/testbitbu.git
 
             # Fetch các thay đổi từ repo B
-            - git pull testbitbu main
+            - git fetch testbitbu main
 
             # Merge các thay đổi từ repo A vào repo B
             - git merge testbitbu/main
