@@ -4,42 +4,30 @@
       - step:
           name: Sync to RepositoryB
           script:
-            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key
+            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key nếu chưa có
             - mkdir -p ~/.ssh
 
             # Thiết lập quyền cho các SSH Private Key có sẵn
             - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
             - echo "$SSH_PRIVATE_KEY_TWO" > ~/.ssh/id_rsa_two
             - chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa_two
-            
+
             # Đảm bảo bitbucket.org được thêm vào known_hosts
             - ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
 
-            # Cấu hình file SSH config để sử dụng đúng key cho repo A và repo B
-            - |
-              echo "Host repoA" >> ~/.ssh/config
-              echo "  HostName bitbucket.org" >> ~/.ssh/config
-              echo "  User git" >> ~/.ssh/config
-              echo "  IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
-
-              echo "Host repoB" >> ~/.ssh/config
-              echo "  HostName bitbucket.org" >> ~/.ssh/config
-              echo "  User git" >> ~/.ssh/config
-              echo "  IdentityFile ~/.ssh/id_rsa_two" >> ~/.ssh/config
-
-            # Kiểm tra SSH key đã được sử dụng đúng cách
-            - ssh -T git@bitbucket.org || exit 1
+            # Thiết lập biến môi trường để bật chế độ debug của SSH
+            - export GIT_SSH_COMMAND="ssh -v"
 
             # Cấu hình Git
             - git config --global user.email "hoangpham19112002@gmail.com"
             - git config --global user.name "hoangpham1911"
 
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
-            - git clone git@repoA:synv09/repositorysource.git
+            - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
 
             # Thêm remote repo B bằng SSH (repo B sẽ dùng id_rsa_two)
-            - git remote add testbitbu git@repoB:hoangvjp129/testbitbu.git
+            - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
 
             # Fetch các thay đổi từ repo B
             - git fetch testbitbu main
@@ -49,3 +37,4 @@
 
             # Đẩy các thay đổi lên repo B
             - git push --force testbitbu main
+ 
