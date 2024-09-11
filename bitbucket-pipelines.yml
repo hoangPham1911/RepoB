@@ -26,7 +26,8 @@
 
             # Fetch các thay đổi từ repository destination trước khi push
             - git fetch repositorydestination main
-            - git merge repositorydestination/main
+            - git push --force repositorydestination main
 
             # Push lên repo B (sử dụng --force nếu bạn chắc chắn cần ghi đè)
-            - git push repositorydestination main
+            - git push --force repositorydestination main
+
