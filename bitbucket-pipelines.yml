@@ -31,7 +31,7 @@
             - ssh -T git@repoA || exit 1
             - ssh -T git@repoB || exit 1
 
-            # Cấu hình Git
+            # Cấu hình Gitt
             - git config --global user.email "hoangpham19112002@gmail.com"
             - git config --global user.name "hoangpham1911"
 
