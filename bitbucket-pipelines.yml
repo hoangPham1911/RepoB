@@ -4,10 +4,15 @@
       - step:
           name: Sync to RepositoryB
           script:
-            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key
+            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key nếu chưa có
             - mkdir -p ~/.ssh
+
+            # Thiết lập quyền cho các SSH Private Key có sẵn
             - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-            - chmod 600 ~/.ssh/id_rsa
+            - echo "$SSH_PRIVATE_KEY_TWO" > ~/.ssh/id_rsa_two
+            - chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa_two
+            
+            # Đảm bảo bitbucket.org được thêm vào known_hosts
             - ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
 
             # Kiểm tra SSH key đã được sử dụng đúng cách
@@ -17,11 +22,11 @@
             - git config --global user.email "hoangpham19112002@gmail.com"
             - git config --global user.name "hoangpham1911"
 
-            # Clone repo A bằng SSH
+            # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
             - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
 
-            # Thêm remote repo B bằng SSH
+            # Thêm remote repo B bằng SSH (repo B sẽ dùng id_rsa_two)
             - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
 
             # Fetch các thay đổi từ repo B
