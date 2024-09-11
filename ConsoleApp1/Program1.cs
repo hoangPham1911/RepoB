@@ -3,9 +3,10 @@ using iTextSharp.text.pdf;
 
 public class PdfSigner
 {
+    // ky so
     public static void InsertSignatureImage(string inputPdfPath, string outputPdfPath, string signatureImagePath)
     {
-        // Đọc tài liệu PDF từ file inputt
+        // Đọc tài liệu PDF từ file input
         using (PdfReader pdfReader = new PdfReader(inputPdfPath))
         using (FileStream outputStream = new FileStream(outputPdfPath, FileMode.Create, FileAccess.Write, FileShare.None))
         {
@@ -24,20 +25,21 @@ public class PdfSigner
                 Rectangle pageSize = pdfReader.GetPageSize(lastPage);
 
                 // Thiết lập vị trí và kích thước của ảnh chữ ký (ở góc dưới bên trái)
-                float x =  signatureImage.ScaledWidth - pageSize.Right + 10 ; // Cách lề phải 10 đơn vị
+                float x = signatureImage.ScaledWidth - pageSize.Right + 10; // Cách lề phải 10 đơn vị
                 float y = pageSize.Bottom + 10; // Cách lề dưới 10 đơn vị
                 signatureImage.SetAbsolutePosition(x, y);
                 signatureImage.ScaleToFit(100, 50);// Kích thước ảnh chữ ký
 
                 // Chèn ảnh chữ ký vào tài liệu PDF
                 pdfContentByte.AddImage(signatureImage);
+                Console.ReadLine();
             }
         }
     }
 
 
 
-
+    // ky so
     public static void Main(string[] args)
     {
         string inputPdfPath = "cv nhan su.pdf"; // Đường dẫn đến file PDF gốc
