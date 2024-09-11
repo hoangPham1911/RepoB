@@ -30,7 +30,7 @@
             - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
 
             # Fetch các thay đổi từ repo B
-            - git fetch testbitbu main
+            - git pull testbitbu main
 
             # Merge các thay đổi từ repo A vào repo B
             - git merge testbitbu/main
