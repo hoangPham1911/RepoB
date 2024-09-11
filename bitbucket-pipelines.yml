@@ -22,12 +22,12 @@
             - cd repositorysource
 
             # Thêm remote repo B bằng SSH
-            - git remote add repositorydestination git@bitbucket.org:synv09/repositorydestination.git
+            - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
 
             # Fetch các thay đổi từ repository destination trước khi push
-            - git fetch repositorydestination main
-            - git push --force repositorydestination main
+            - git fetch testbitbu main
+            - git push --force testbitbu main
 
             # Push lên repo B (sử dụng --force nếu bạn chắc chắn cần ghi đè)
-            - git push --force repositorydestination main
+            - git push --force testbitbu main
 

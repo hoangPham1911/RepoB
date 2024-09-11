@@ -42,11 +42,11 @@ public class PdfSigner
     // ky so
     public static void Main(string[] args)
     {
-        string inputPdfPath = "cv nhan su.pdf"; // Đường dẫn đến file PDF gốc
-        string outputPdfPath = "output_signed.pdf"; // Đường dẫn đến file PDF sau khi chèn ảnh chữ ký và ký số
-        string signatureImagePath = "sign.png"; // Đường dẫn đến file ảnh chữ ký
+        //string inputPdfPath = "cv nhan su.pdf"; // Đường dẫn đến file PDF gốc
+        //string outputPdfPath = "output_signed.pdf"; // Đường dẫn đến file PDF sau khi chèn ảnh chữ ký và ký số
+        //string signatureImagePath = "sign.png"; // Đường dẫn đến file ảnh chữ ký
 
-        InsertSignatureImage(inputPdfPath, outputPdfPath, signatureImagePath);
+        //InsertSignatureImage(inputPdfPath, outputPdfPath, signatureImagePath);
         Console.WriteLine("Chèn ảnh chữ ký và ký số PDF thành công.");
 
         // Step 2: Load PDF Document
