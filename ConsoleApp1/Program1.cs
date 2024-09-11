@@ -47,7 +47,7 @@ public class PdfSigner
         //string signatureImagePath = "sign.png"; // Đường dẫn đến file ảnh chữ ký
 
         //InsertSignatureImage(inputPdfPath, outputPdfPath, signatureImagePath);
-        Console.WriteLine("Chèn ảnh chữ ký và ký số PDF thành công.");
+        Console.WriteLine("Chèn ảnh chữ ký và ký số PDF thành công!");
 
         // Step 2: Load PDF Document
         //string pdfFilePath = "cv nhan su.pdf";
