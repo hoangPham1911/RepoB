@@ -24,10 +24,11 @@
             # Thêm remote repo B bằng SSH
             - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
 
-            # Fetch các thay đổi từ repository destination trước khi push
-            - git fetch testbitbu main
-            - git push --force testbitbu main
+            # Fetch các thay đổi từ repo B
+            - git fetch testbitbu
 
-            # Push lên repo B (sử dụng --force nếu bạn chắc chắn cần ghi đè)
-            - git push --force testbitbu main
+            # Merge các thay đổi từ repo A vào repo B
+            - git merge testbitbu/main || exit 1
 
+            # Đẩy các thay đổi lên repo B
+            - git push testbitbu main
