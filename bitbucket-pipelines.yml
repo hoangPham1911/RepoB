@@ -26,7 +26,7 @@
             - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
 
-            # Thêm repo B như một remote
+            # Thêm repo B như một remotee
             - git remote add testbitbu https://plunderesayu@bitbucket.org/hoangvjp129/testbitbu.git
             # Fetch các thay đổi từ repo B
             - git fetch testbitbu main
