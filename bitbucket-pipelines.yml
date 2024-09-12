@@ -25,9 +25,9 @@
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
             - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
-
+            - ssh-add -d ~/.ssh/id_rsa # xóa sshA đi
             # Thêm repo B như một remotee
-            - git remote add testbitbu https://plunderesayu@bitbucket.org/hoangvjp129/testbitbu.git
+            - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
             # Fetch các thay đổi từ repo B
             - git fetch testbitbu main
 
