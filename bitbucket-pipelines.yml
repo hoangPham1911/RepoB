@@ -23,12 +23,11 @@
             - git config --global user.name "hoangpham1911"
 
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
-            - git config --global http.sslVerify "false"
-            - git clone https://hoangpham19112002@bitbucket.org/synv09/repositorysource.git
+            - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
 
             # Thêm repo B như một remote
-            - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
+            - git remote add testbitbu https://plunderesayu@bitbucket.org/hoangvjp129/testbitbu.git
             # Fetch các thay đổi từ repo B
             - git fetch testbitbu main
 
