@@ -30,7 +30,7 @@
             - git fetch origin main
 
             # Merge các thay đổi từ repo A vào repo B
-            - git merge testbitbu/main
+            - git merge origin/main
 
             # Đẩy các thay đổi lên repo B
             - git push --force origin main
