@@ -28,7 +28,7 @@
 
             # Thêm repo B như một remote
             - git remote add repoB git@bitbucket.org:hoangvjp129/testbitbu.git
-
+            - git remote set-url repoB git@bitbucket.org:hoangvjp129/testbitbu.git
             # Fetch các thay đổi từ repo B
             - git fetch repoB main
 
