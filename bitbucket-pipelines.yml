@@ -1,39 +1,7 @@
 ﻿pipelines:
-  branches:
-    main:
-      - step:
-          name: Sync to RepositoryB
-          script:
-            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key nếu chưa có
-            - mkdir -p ~/.ssh
-
-            # Thiết lập quyền cho các SSH Private Key có sẵn
-            - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-            - echo "$SSH_PRIVATE_KEY_TWO" > ~/.ssh/id_rsa_two
-            - chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa_two
-
-            # Đảm bảo bitbucket.org được thêm vào known_hosts
-            - ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
-
-            # Thiết lập biến môi trường để bật chế độ debug của SSH
-            - export GIT_SSH_COMMAND="ssh -v"
-
-            # Cấu hình Git
-            - git config --global user.email "hoangpham19112002@gmail.com"
-            - git config --global user.name "hoangpham1911"
-
-            # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
-            - git clone git@bitbucket.org:synv09/repositorysource.git
-            - cd repositorysource
-
-            # Thêm remote repo B bằng SSH (repo B sẽ dùng id_rsa_two)
-            - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
-
-            # Fetch các thay đổi từ repo B
-            - git fetch testbitbu main
-
-            # Merge các thay đổi từ repo A vào repo B
-            - git merge testbitbu/main
-
-            # Đẩy các thay đổi lên repo B
-            - git push --force testbitbu main
+  default:
+    - step:
+        name: Sync RepoA to RepoB
+        script:
+          - apt-get update && apt-get install -y ssh
+          - ssh-agent bash -c 'ssh-add ~/.ssh/id_rsa && ssh-add ~/.ssh/id_rsa_new && git clone git@bitbucket.org:synv09/repositorysource.git repoA && cd repoA && git pull origin master && git remote add repoB git@bitbucket.org:hoangvjp129/testbitbu.git && git push repoB master'
