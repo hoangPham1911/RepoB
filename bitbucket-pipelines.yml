@@ -21,8 +21,15 @@
             - git clone git@bitbucket.org:synv09/repositorysource.git repoA
             - cd repoA
 
-            # Thêm remote cho repoB và thiết lập SSH key cho nó
-            - git remote add repoB git@bitbucket.org:hoangvjp129/testbitbu.git
+            # Kiểm tra xem remote repoB đã tồn tại chưa
+            - if git remote get-url repoB > /dev/null 2>&1; then
+                echo "Remote repoB already exists, updating URL...";
+                git remote set-url repoB git@bitbucket.org:hoangvjp129/testbitbu.git;
+              else
+                echo "Adding remote repoB...";
+                git remote add repoB git@bitbucket.org:hoangvjp129/testbitbu.git;
+                git remote set-url repoB git@bitbucket.org:hoangvjp129/testbitbu.git;
+              fi
 
             # Fetch và merge các thay đổi từ repoB vào repoA
             - git fetch repoB main
