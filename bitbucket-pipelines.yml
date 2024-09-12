@@ -15,22 +15,28 @@
             # Đảm bảo bitbucket.org được thêm vào known_hosts
             - ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
 
-            # Thiết lập biến môi trường để bật chế độ debug của SSH
-            - export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa"
+            # Khởi động SSH agent
+            - eval $(ssh-agent -s)
+
+            # Thêm id_rsa vào SSH agent
+            - ssh-add ~/.ssh/id_rsa
 
             # Cấu hình Git
             - git config --global user.email "hoangpham19112002@gmail.com"
             - git config --global user.name "hoangpham1911"
 
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
-            - git clone git@bitbucket.org:hoangvjp129/testbitbu.git
+            - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
             
+            # Xóa id_rsa khỏi SSH agent
+            - ssh-add -d ~/.ssh/id_rsa
+
+            # Thêm id_rsa_new vào SSH agent
+            - ssh-add ~/.ssh/id_rsa_new
+
             # Thêm repo B như một remote
             - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
-
-            # Đổi SSH key để repo B dùng id_rsa_new
-            - export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa_new"
 
             # Fetch các thay đổi từ repo B
             - git fetch testbitbu main
@@ -40,6 +46,9 @@
 
             # Đẩy các thay đổi lên repo B
             - git push --force testbitbu main
-            
-            # Khi đẩy xong, chuyển lại về SSH key cũ (id_rsa)
-            - export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa"
+
+            # Xóa id_rsa_new khỏi SSH agent
+            - ssh-add -d ~/.ssh/id_rsa_new
+
+            # Thêm lại id_rsa vào SSH agent nếu cần tiếp tục làm việc với repo A
+            - ssh-add ~/.ssh/id_rsa
