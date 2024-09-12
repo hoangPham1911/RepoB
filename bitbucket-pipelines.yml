@@ -47,7 +47,7 @@
             # Đẩy các thay đổi lên repo B
             - git push --force testbitbu main
 
-            # Xóa id_rsa_new khỏi SSH agent
+            # Xóa id_rsa_new khỏi SSH agentt
             - ssh-add -d ~/.ssh/id_rsa_new
 
             # Thêm lại id_rsa vào SSH agent nếu cần tiếp tục làm việc với repo A
