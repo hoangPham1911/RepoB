@@ -26,6 +26,8 @@
             - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
             - ssh-add -d ~/.ssh/id_rsa # xóa sshA đi
+            # Add lại sshB
+            - ssh-add ~/.ssh/id_rsa_new
             # Thêm repo B như một remotee
             - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
             # Fetch các thay đổi từ repo B
