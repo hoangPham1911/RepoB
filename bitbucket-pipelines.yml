@@ -23,17 +23,16 @@
             - git config --global user.name "hoangpham1911"
 
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
-            - git clone git@bitbucket.org:synv09/repositorysource.git
+            - git clone https://hoangpham19112002@bitbucket.org/synv09/repositorysource.git
             - cd repositorysource
 
             # Thêm repo B như một remote
-            - git remote add origin git@bitbucket.org:hoangvjp129/testbitbu.git
-            - git remote set-url origin git@bitbucket.org:hoangvjp129/testbitbu.git
+            - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
             # Fetch các thay đổi từ repo B
-            - git fetch origin main
+            - git fetch testbitbu main
 
             # Merge các thay đổi từ repo A vào repo B
-            - git merge origin/main
+            - git merge testbitbu/main
 
             # Đẩy các thay đổi lên repo B
-            - git push --force origin main
+            - git push --force testbitbu main
