@@ -1,16 +1,39 @@
-pipelines:
-  pull-requests:
-    '**':
+﻿pipelines:
+  branches:
+    main:
       - step:
-          name: Sync PR to repo-dich
+          name: Sync to RepositoryB
           script:
+            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key nếu chưa có
+            - mkdir -p ~/.ssh
+
+            # Thiết lập quyền cho các SSH Private Key có sẵn
+            - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+            - echo "$SSH_PRIVATE_KEY_TWO" > ~/.ssh/id_rsa_two
+            - chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa_two
+
+            # Đảm bảo bitbucket.org được thêm vào known_hosts
+            - ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
+
+            # Thiết lập biến môi trường để bật chế độ debug của SSH
+            - export GIT_SSH_COMMAND="ssh -v"
+
+            # Cấu hình Git
             - git config --global user.email "hoangpham19112002@gmail.com"
             - git config --global user.name "hoangpham1911"
-            - git clone https://<username>:<app-password>https://bitbucket.org/synv09/repositorysource.git/
+
+            # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
+            - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
-            - git remote add repo-dich https://<username>:<app-password>https://hoangpham19112002@bitbucket.org/synv09/repositorydestination.git
-            - git fetch repo-dich
-            - git checkout $BITBUCKET_PR_DESTINATION_BRANCH
-            - git pull origin $BITBUCKET_PR_DESTINATION_BRANCH
-            - git merge origin/$BITBUCKET_PR_SOURCE_BRANCH
-            - git push repo-dich $BITBUCKET_PR_DESTINATION_BRANCH
+
+            # Thêm remote repo B bằng SSH (repo B sẽ dùng id_rsa_two)
+            - git remote add origin git@bitbucket.org:hoangvjp129/testbitbu.git
+
+            # Fetch các thay đổi từ repo B
+            - git fetch origin main
+
+            # Merge các thay đổi từ repo A vào repo B
+            - git merge testbitbu/main
+
+            # Đẩy các thay đổi lên repo B
+            - git push --force origin main
