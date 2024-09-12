@@ -4,10 +4,8 @@
       - step:
           name: Sync to RepositoryB
           script:
-            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key nếu chưa có
+            # Tạo thư mục ~/.ssh nếu chưa có và thiết lập quyền cho SSH Private Key
             - mkdir -p ~/.ssh
-
-            # Thiết lập quyền cho các SSH Private Key có sẵn
             - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
             - echo "$SSH_PRIVATE_KEY_TWO" > ~/.ssh/id_rsa_two
             - chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa_two
@@ -15,22 +13,20 @@
             # Đảm bảo bitbucket.org được thêm vào known_hosts
             - ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
 
-            # Thiết lập biến môi trường để bật chế độ debug của SSH
-            - export GIT_SSH_COMMAND="ssh -v"
-
             # Cấu hình Git
             - git config --global user.email "hoangpham19112002@gmail.com"
             - git config --global user.name "hoangpham1911"
 
-            # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
-            - git clone git@bitbucket.org:synv09/repositorysource.git
-            - cd repositorysource
+            # Clone repoA (repo A sẽ dùng id_rsa)
+            - git clone git@bitbucket.org:synv09/repositorysource.git repoA
+            - cd repoA
 
-            # Fetch các thay đổi từ repo B
-            - git fetch origin main
+            # Thêm remote cho repoB và thiết lập SSH key cho nó
+            - git remote add repoB git@bitbucket.org:hoangvjp129/testbitbu.git
 
-            # Merge các thay đổi từ repo A vào repo B
-            - git merge origin/main
+            # Fetch và merge các thay đổi từ repoB vào repoA
+            - git fetch repoB main
+            - git merge repoB/main --allow-unrelated-histories
 
-            # Đẩy các thay đổi lên repo B
-            - git push --force origin main
+            # Đẩy các thay đổi từ repoA lên repoB
+            - git push repoB main
