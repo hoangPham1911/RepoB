@@ -36,3 +36,9 @@
 
             # Đẩy các thay đổi lên repo B
             - git push --force testbitbu main
+            # Khi đẩy lên repoB xóa sshB đi
+            - ssh-add -d ~/.ssh/id_rsa_new
+            # Add lại sshA
+            - ssh-add ~/.ssh/id_rsa
+            # Add lại sshB
+            - ssh-add ~/.ssh/id_rsa_new
