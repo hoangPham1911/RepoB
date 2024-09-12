@@ -8,6 +8,8 @@ namespace ConsoleApp1
 {
     public class Class1
     {
-        public int MyPropertys { get; set; }
+        public int MyProperty2323 { get; set; }
+        public int Myssss2 { get; set; }
+
     }
 }

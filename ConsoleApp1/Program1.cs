@@ -3,6 +3,7 @@ using iTextSharp.text.pdf;
 
 public class PdfSigner
 {
+    // ky so
     public static void InsertSignatureImage(string inputPdfPath, string outputPdfPath, string signatureImagePath)
     {
         // Đọc tài liệu PDF từ file input
@@ -31,6 +32,7 @@ public class PdfSigner
 
                 // Chèn ảnh chữ ký vào tài liệu PDF
                 pdfContentByte.AddImage(signatureImage);
+                Console.ReadLine();
             }
         }
     }
@@ -40,12 +42,12 @@ public class PdfSigner
     // ky so
     public static void Main(string[] args)
     {
-        string inputPdfPath = "cv nhan su.pdf"; // Đường dẫn đến file PDF gốc
-        string outputPdfPath = "output_signed.pdf"; // Đường dẫn đến file PDF sau khi chèn ảnh chữ ký và ký số
-        string signatureImagePath = "sign.png"; // Đường dẫn đến file ảnh chữ ký
+        //string inputPdfPath = "cv nhan su.pdf"; // Đường dẫn đến file PDF gốc
+        //string outputPdfPath = "output_signed.pdf"; // Đường dẫn đến file PDF sau khi chèn ảnh chữ ký và ký số
+        //string signatureImagePath = "sign.png"; // Đường dẫn đến file ảnh chữ ký
 
-        InsertSignatureImage(inputPdfPath, outputPdfPath, signatureImagePath);
-        Console.WriteLine("Chèn ảnh chữ ký và ký số PDF thành công.");
+        //InsertSignatureImage(inputPdfPath, outputPdfPath, signatureImagePath);
+        Console.WriteLine("Chèn ảnh chữ ký và ký số PDF thành công!");
 
         // Step 2: Load PDF Document
         //string pdfFilePath = "cv nhan su.pdf";
