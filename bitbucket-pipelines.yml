@@ -4,29 +4,37 @@
       - step:
           name: Sync to RepositoryB
           script:
-            # Tạo thư mục ~/.ssh và thiết lập quyền cho SSH Private Key nếu chưa có
+            # Tạo thư mục ~/.ssh và thiết lập quyền nếu chưa có
             - mkdir -p ~/.ssh
+            - chmod 700 ~/.ssh
 
             # Thiết lập quyền cho các SSH Private Key có sẵn
             - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-            - chmod 600 ~/.ssh/id_rsa
+            - echo "$SSH_PRIVATE_KEY_TWO" > ~/.ssh/id_rsa_new
+            - chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa_new
 
             # Đảm bảo bitbucket.org được thêm vào known_hosts
             - ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts
 
             # Khởi động SSH agent
-            - eval $(ssh-agent -s)
+            - eval "$(ssh-agent -s)"
 
-            # Thêm key vào SSH agent
+            # Thêm id_rsa vào SSH agent
             - ssh-add ~/.ssh/id_rsa
 
             # Cấu hình Git
             - git config --global user.email "hoangpham19112002@gmail.com"
             - git config --global user.name "hoangpham1911"
 
-            # Clone repo A
+            # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
             - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
+
+            # Xóa id_rsa khỏi SSH agent
+            - ssh-add -d ~/.ssh/id_rsa
+
+            # Thêm id_rsa_new vào SSH agent
+            - ssh-add ~/.ssh/id_rsa_new
 
             # Thêm repo B như một remote
             - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
@@ -35,7 +43,13 @@
             - git fetch testbitbu main
 
             # Merge các thay đổi từ repo B vào repo A
-            - git merge testbitbu/main
+            - git merge testbitbu/main || echo "Không có thay đổi để merge" # Xử lý trường hợp không có gì để merge
 
             # Đẩy các thay đổi lên repo B
             - git push --force testbitbu main
+
+            # Xóa id_rsa_new khỏi SSH agent
+            - ssh-add -d ~/.ssh/id_rsa_new
+
+            # Thêm lại id_rsa vào SSH agent nếu cần tiếp tục làm việc với repo A
+            - ssh-add ~/.ssh/id_rsa
