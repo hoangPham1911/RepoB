@@ -27,13 +27,13 @@
             - cd repositorysource
 
             # Thêm repo B như một remote
-            - git remote add repoB git@bitbucket.org:hoangvjp129/testbitbu.git
+            - git remote add origin git@bitbucket.org:hoangvjp129/testbitbu.git
 
             # Fetch các thay đổi từ repo B
-            - git fetch repoB main
+            - git fetch origin main
 
             # Merge các thay đổi từ repo A vào repo B
-            - git merge repoB/main
+            - git merge origin/main
 
             # Đẩy các thay đổi lên repo B
-            - git push --force repoB main
+            - git push --force origin main
