@@ -5,4 +5,3 @@
         script:
           - apt-get update && apt-get install -y ssh
           - ssh-agent bash -c 'ssh-add /c/Users/pc/.ssh/id_rsa && ssh-add /c/Users/pc/.ssh/id_rsa_new && git clone git@bitbucket.org:synv09/repositorysource.git repoA && cd repoA && git pull origin master && git remote add repoB git@bitbucket.org:hoangvjp129/testbitbu.git && git push repoB master'
-
