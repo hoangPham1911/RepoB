@@ -26,9 +26,6 @@
             - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
 
-            # Thêm remote repo B bằng SSH (repo B sẽ dùng id_rsa_two)
-            - git remote add origin git@bitbucket.org:hoangvjp129/testbitbu.git
-
             # Fetch các thay đổi từ repo B
             - git fetch origin main
 
