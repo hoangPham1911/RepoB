@@ -23,6 +23,7 @@
             - git config --global user.name "hoangpham1911"
 
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
+            - git config --global http.sslVerify false
             - git clone https://hoangpham19112002@bitbucket.org/synv09/repositorysource.git
             - cd repositorysource
 
