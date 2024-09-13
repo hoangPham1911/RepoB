@@ -25,18 +25,16 @@
 
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
             - git clone git@bitbucket.org:synv09/repositorysource.git
-            - git clone git@bitbucket.org:hoangvjp129/testbitbu.git
             - cd repositorysource
 
-
             # Thêm repo B như một remote
-            - git remote add testbitbu git@bitbucket.org:hoangvjp129/testbitbu.git
+            - git remote add RepoB git@github.com:hoangPham1911/RepoB.git
 
             # Fetch các thay đổi từ repo B
-            - git fetch testbitbu main
+            - git fetch RepoB main
 
             # Merge các thay đổi từ repo B vào repo A
-            - git merge testbitbu/main || echo "Không có thay đổi để merge" # Xử lý trường hợp không có gì để merge
+            - git merge RepoB/main || echo "Không có thay đổi để merge" # Xử lý trường hợp không có gì để merge
 
             # Đẩy các thay đổi lên repo B
-            - git push --force testbitbu main
+            - git push --force RepoB main
