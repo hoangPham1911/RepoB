@@ -10,7 +10,7 @@
 
             # Thiết lập quyền cho các SSH Private Key có sẵn
             - echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-            - echo "$SSH_PRIVATE_KEY_TWO" > ~/.ssh/id_rsa_new
+            - echo "$SSH_PRIVATE_KEY_NEW" > ~/.ssh/id_rsa_new
             - chmod 600 ~/.ssh/id_rsa ~/.ssh/id_rsa_new
 
             # Đảm bảo bitbucket.org được thêm vào known_hosts
