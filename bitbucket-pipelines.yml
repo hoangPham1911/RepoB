@@ -34,7 +34,7 @@
             - git fetch RepoB main
 
             # Merge các thay đổi từ repo B vào repo A
-            - git merge RepoB/main || echo "Không có thay đổi để merge" # Xử lý trường hợp không có gì để merge
+            - git merge RepoB/main --allow-unrelated-histories || echo "Không có thay đổi để merge" # Xử lý trường hợp không có gì để merge
 
             # Đẩy các thay đổi lên repo B
             - git push --force RepoB main
