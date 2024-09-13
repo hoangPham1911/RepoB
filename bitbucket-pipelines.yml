@@ -25,6 +25,7 @@
 
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
             - git clone git@bitbucket.org:synv09/repositorysource.git
+            - git clone git@bitbucket.org:hoangvjp129/testbitbu.git
             - cd repositorysource
 
 
