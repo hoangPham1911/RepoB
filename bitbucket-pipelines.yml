@@ -26,6 +26,7 @@
             - git clone git@bitbucket.org:synv09/repositorysource.git
             - cd repositorysource
 
+
             # Thêm repo B như một remote
             - git remote add RepoB git@github.com:hoangPham1911/RepoB.git
 
