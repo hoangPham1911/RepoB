@@ -23,7 +23,7 @@
             - git config --global user.name "hoangpham1911"
 
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
-            - git clone git@bitbucket.org:synv09/repositorysource.git
+            - git clone git@bitbucket.org:hoang_02/repoa.git
             - cd repositorysource
 
 
