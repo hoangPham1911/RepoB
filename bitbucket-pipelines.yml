@@ -24,7 +24,7 @@
 
             # Clone repo A bằng SSH (repo A sẽ dùng id_rsa)
             - git clone git@bitbucket.org:hoang_02/repoa.git
-            - cd repositorysource
+            - cd repoa
 
 
             # Thêm repo B như một remote
